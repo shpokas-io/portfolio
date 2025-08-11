@@ -19,9 +19,9 @@ export function Hero() {
       <div className="container max-w-7xl mx-auto px-6 relative z-10">
         <div className="min-h-screen flex items-center justify-center">
           <div className="relative w-full">
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 lg:translate-x-0 lg:translate-y-0 lg:top-0 lg:left-2/3 z-20">
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 lg:translate-x-0 lg:translate-y-0 lg:top-1/2 lg:-translate-y-1/2 lg:right-0 lg:left-auto z-20">
               <div className="relative group">
-                <div className="relative w-80 h-80 md:w-96 md:h-96 lg:w-[420px] lg:h-[420px] transform rotate-12 hover:rotate-6 transition-all duration-700 ease-out">
+                <div className="relative w-96 h-96 md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] xl:w-[700px] xl:h-[700px] transform rotate-12 hover:rotate-6 transition-all duration-700 ease-out">
                   <div
                     className="w-full h-full relative overflow-hidden"
                     style={{
@@ -30,24 +30,24 @@ export function Hero() {
                     }}
                   >
                     <div className="w-full h-full bg-gradient-to-br from-gray-200 via-gray-100 to-gray-300 flex items-center justify-center transform -rotate-12">
-                      <span className="text-gray-500 text-xl font-medium">
+                      <span className="text-gray-500 text-2xl md:text-3xl font-medium">
                         PHOTO
                       </span>
                     </div>
                   </div>
 
-                  <div className="absolute -top-8 -left-8 w-16 h-16 border-2 border-dashed rounded-full animate-pulse opacity-60"></div>
-                  <div className="absolute -bottom-6 -right-8 w-12 h-12 border-2 border-dotted rounded-full animate-pulse opacity-40 animation-delay-1000"></div>
-                  <div className="absolute top-1/4 -left-12 w-8 h-8 rounded-full border-2 opacity-30 animate-bounce animation-delay-500"></div>
+                  <div className="absolute -top-12 -left-12 w-20 h-20 border-2 border-dashed rounded-full animate-pulse opacity-60"></div>
+                  <div className="absolute -bottom-8 -right-12 w-16 h-16 border-2 border-dotted rounded-full animate-pulse opacity-40 animation-delay-1000"></div>
+                  <div className="absolute top-1/4 -left-16 w-10 h-10 rounded-full border-2 opacity-30 animate-bounce animation-delay-500"></div>
                 </div>
 
-                <div className="absolute inset-0 w-80 h-80 md:w-96 md:h-96 lg:w-[420px] lg:h-[420px]">
+                <div className="absolute inset-0 w-96 h-96 md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] xl:w-[700px] xl:h-[700px]">
                   <a
                     href="#"
                     className="absolute top-0 left-1/4 transform -translate-x-1/2 group/social"
                   >
-                    <div className="w-12 h-12 flex items-center justify-center rounded-full border-2 bg-background shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-125">
-                      <Linkedin className="w-5 h-5" />
+                    <div className="w-14 h-14 flex items-center justify-center rounded-full border-2 bg-background shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-125">
+                      <Linkedin className="w-6 h-6" />
                     </div>
                   </a>
 
@@ -55,8 +55,8 @@ export function Hero() {
                     href="#"
                     className="absolute top-1/4 right-0 transform translate-x-1/2 group/social"
                   >
-                    <div className="w-12 h-12 flex items-center justify-center rounded-full border-2 bg-background shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-125">
-                      <Github className="w-5 h-5" />
+                    <div className="w-14 h-14 flex items-center justify-center rounded-full border-2 bg-background shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-125">
+                      <Github className="w-6 h-6" />
                     </div>
                   </a>
 
@@ -64,8 +64,8 @@ export function Hero() {
                     href="#"
                     className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 group/social"
                   >
-                    <div className="w-12 h-12 flex items-center justify-center rounded-full border-2 bg-background shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-125">
-                      <Mail className="w-5 h-5" />
+                    <div className="w-14 h-14 flex items-center justify-center rounded-full border-2 bg-background shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-125">
+                      <Mail className="w-6 h-6" />
                     </div>
                   </a>
                 </div>
