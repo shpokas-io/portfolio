@@ -34,7 +34,7 @@ export default function BlogPage() {
 
           <div className="space-y-6 max-w-2xl mx-auto">
             <p className="text-xl md:text-2xl font-light leading-relaxed opacity-90">
-              I'm currently working on something amazing for this space.
+              I&apos;m currently working on something amazing for this space.
             </p>
             <p className="text-lg font-light opacity-70">
               This blog will feature insights about web development, design trends, and my journey as a creative developer. Stay tuned!

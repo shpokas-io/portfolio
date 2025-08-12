@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Calendar, MapPin, Code, Briefcase } from "lucide-react";
+import { Calendar, Code, Briefcase } from "lucide-react";
 
 const experiences = [
   {
