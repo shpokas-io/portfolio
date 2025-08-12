@@ -1,8 +1,9 @@
 import './globals.css';
+import { ClientWrapper } from '@/components/ClientWrapper';
 
 export const metadata = {
-  title: 'Simple Tailwind Test',
-  description: 'A minimal test for Tailwind CSS with Next.js',
+  title: 'SHPOKAS - Portfolio',
+  description: 'Creative developer portfolio with vibrant animations',
 };
 
 export default function RootLayout({
@@ -12,7 +13,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <ClientWrapper>
+          {children}
+        </ClientWrapper>
+      </body>
     </html>
   );
 }
