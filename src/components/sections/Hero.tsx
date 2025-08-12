@@ -4,7 +4,7 @@ import { Github, Linkedin, Mail } from "lucide-react";
 
 export function Hero() {
   return (
-    <section className="h-screen flex items-center justify-center relative overflow-hidden border border-green-500">
+    <section id="hero" className="h-screen flex items-center justify-center relative overflow-hidden">
       {/* Mobile Layout (sm and below) */}
       <div className="block lg:hidden max-w-sm mx-auto px-4 text-center">
         <div className="space-y-8">
