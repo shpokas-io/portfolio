@@ -63,6 +63,14 @@
   * {
     @apply border-border;
   }
+
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  }
+
   body {
     @apply bg-background text-foreground;
   }
