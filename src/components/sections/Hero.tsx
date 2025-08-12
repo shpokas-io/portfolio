@@ -4,13 +4,15 @@ import { Github, Linkedin, Mail } from "lucide-react";
 
 export function Hero() {
   return (
-    <section className="h-screen flex items-center justify-center relative overflow-hidden">
+    <section className="h-screen flex items-center justify-center relative overflow-hidden border border-green-500">
       {/* Mobile Layout (sm and below) */}
       <div className="block lg:hidden max-w-sm mx-auto px-4 text-center">
         <div className="space-y-8">
           {/* Mobile Text */}
           <div>
-            <p className="text-xl sm:text-2xl font-light opacity-80">I&apos;m</p>
+            <p className="text-xl sm:text-2xl font-light opacity-80">
+              I&apos;m
+            </p>
             <h1 className="text-3xl sm:text-4xl font-black tracking-tighter leading-none">
               SHPOKAS
             </h1>
