@@ -1,4 +1,6 @@
-import { Github, Linkedin, Mail } from "lucide-react";
+"use client";
+
+import { Github, Linkedin, Mail, ChevronDown } from "lucide-react";
 
 export function Hero() {
   return (
@@ -19,9 +21,9 @@ export function Hero() {
       <div className="container max-w-7xl mx-auto px-6 relative z-10">
         <div className="min-h-screen flex items-center justify-center">
           <div className="relative w-full">
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 lg:translate-x-0 lg:translate-y-0 lg:top-1/2 lg:-translate-y-1/2 lg:right-0 lg:left-auto z-20">
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 lg:top-1/4 lg:right-8 lg:left-auto lg:translate-x-0 lg:-translate-y-1/2 xl:right-4 xl:top-1/5 z-20">
               <div className="relative group">
-                <div className="relative w-96 h-96 md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] xl:w-[700px] xl:h-[700px] transform rotate-12 hover:rotate-6 transition-all duration-700 ease-out">
+                <div className="relative w-80 h-80 md:w-96 md:h-96 lg:w-[500px] lg:h-[500px] xl:w-[600px] xl:h-[600px] transform rotate-12 hover:rotate-6 transition-all duration-700 ease-out">
                   <div
                     className="w-full h-full relative overflow-hidden"
                     style={{
@@ -72,7 +74,7 @@ export function Hero() {
               </div>
             </div>
 
-            <div className="relative z-30 pt-32 lg:pt-0">
+            <div className="relative z-30 pt-16 lg:pt-0 lg:-mt-20">
               <div className="mb-12 lg:mb-16">
                 <div className="text-3xl md:text-4xl lg:text-5xl font-light tracking-wider opacity-80 mb-2 ml-4 lg:ml-8">
                   I&apos;m
@@ -105,6 +107,25 @@ export function Hero() {
         <div className="absolute top-1/4 left-1/3 w-96 h-96 rounded-full opacity-5 blur-3xl animate-pulse animation-delay-2000"></div>
         <div className="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full opacity-10 blur-3xl animate-pulse animation-delay-3000"></div>
       </div>
+
+      <button
+        onClick={() => {
+          document.getElementById("about")?.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        }}
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-30 group pointer-events-auto"
+      >
+        <div className="flex flex-col items-center space-y-2">
+          <div className="w-12 h-12 flex items-center justify-center rounded-full border-2 bg-background/80 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 group-hover:bg-background">
+            <ChevronDown className="w-6 h-6 animate-bounce" />
+          </div>
+          <span className="text-sm font-medium opacity-60 group-hover:opacity-100 transition-opacity duration-300">
+            Scroll
+          </span>
+        </div>
+      </button>
     </section>
   );
 }
