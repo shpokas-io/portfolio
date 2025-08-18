@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
 const navItems = [
@@ -54,56 +53,50 @@ export function Navbar() {
   };
 
   return (
-    <nav className="fixed top-0 z-50 w-full bg-background/80 backdrop-blur-md border-b border-current/10">
-      <div className="container max-w-7xl mx-auto px-6">
+    <nav className="fixed top-0 z-50 w-full bg-background/95 backdrop-blur-sm border-b border-foreground/5">
+      <div className="container max-w-6xl mx-auto px-6">
         <div className="flex h-16 items-center justify-between">
           
           <button
             onClick={() => scrollToSection("#hero")}
-            className="text-2xl md:text-3xl font-black tracking-tighter hover:opacity-80 transition-opacity duration-300"
+            className="text-lg font-medium tracking-wider hover:opacity-60 transition-opacity duration-300"
           >
             SHPOKAS
           </button>
 
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-12">
             {navItems.map((item) => (
               <button
                 key={item.name}
                 onClick={() => scrollToSection(item.href)}
-                className={`relative text-sm font-medium transition-all duration-300 hover:opacity-100 ${
+                className={`relative text-sm font-light tracking-wide transition-all duration-300 ${
                   activeSection === item.href.substring(1)
                     ? "opacity-100"
-                    : "opacity-60"
+                    : "opacity-50 hover:opacity-80"
                 }`}
               >
                 {item.name}
                 {activeSection === item.href.substring(1) && (
-                  <div className="absolute -bottom-1 left-0 right-0 h-px bg-current"></div>
+                  <div className="absolute -bottom-1 left-0 w-4 h-px bg-foreground"></div>
                 )}
               </button>
             ))}
             
-            <div className="w-px h-6 bg-current opacity-20"></div>
+            <div className="w-px h-4 bg-foreground/20"></div>
             
             <Link href="/blog">
-              <Button 
-                variant="outline" 
-                size="sm"
-                className="rounded-full border-current/20 hover:border-current/40 transition-all duration-300 hover:scale-105"
-              >
+              <button className="text-sm font-light tracking-wide opacity-50 hover:opacity-80 transition-opacity duration-300">
                 Blog
-              </Button>
+              </button>
             </Link>
           </div>
 
           <div className="md:hidden">
-            <Button 
-              variant="outline" 
-              size="sm"
-              className="rounded-full"
-            >
-              Menu
-            </Button>
+            <button className="w-6 h-6 flex flex-col justify-center space-y-1 opacity-60 hover:opacity-100 transition-opacity">
+              <div className="w-full h-px bg-foreground"></div>
+              <div className="w-full h-px bg-foreground"></div>
+              <div className="w-full h-px bg-foreground"></div>
+            </button>
           </div>
 
         </div>

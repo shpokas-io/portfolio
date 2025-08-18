@@ -4,83 +4,78 @@
 
 @layer base {
   :root {
-    /* 2024 TRENDING: Dark Cyberpunk Aesthetic with Neon Accents */
-    /* Main Background: Rich dark charcoal with purple undertone */
-    --background: 260 15% 8%;
-    /* Text Color: Electric cyan for vibrant pop */
-    --foreground: 180 85% 75%;
+    /* Minimalistic Black & White Theme */
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
     
-    /* Card backgrounds: Slightly lighter dark with blue tint */
-    --card: 240 20% 12%;
-    --card-foreground: 320 80% 70%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
     
-    /* Popover/Dropdown styles */
-    --popover: 245 18% 10%;
-    --popover-foreground: 90 75% 65%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
     
-    /* Primary Accent: Electric neon cyan - trending 2024 */
-    --primary: 180 100% 60%;
-    --primary-foreground: 260 15% 8%;
+    --primary: 0 0% 9%;
+    --primary-foreground: 0 0% 98%;
     
-    /* Secondary Accent: Neon hot pink - cyberpunk vibes */
-    --secondary: 320 100% 70%;
-    --secondary-foreground: 260 15% 8%;
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
     
-    /* Muted backgrounds and text */
-    --muted: 250 15% 18%;
-    --muted-foreground: 270 60% 70%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
     
-    /* Accent colors: Electric lime green - modern pop */
-    --accent: 90 100% 60%;
-    --accent-foreground: 260 15% 8%;
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9%;
     
-    /* Destructive (error) states - neon red */
-    --destructive: 0 100% 65%;
-    --destructive-foreground: 60 100% 80%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
     
-    /* Borders and inputs - subtle but visible */
-    --border: 240 25% 25%;
-    --input: 245 20% 22%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 0 0% 3.9%;
     
-    /* Focus rings - electric yellow glow */
-    --ring: 60 100% 65%;
-    
-    /* Chart colors - neon cyberpunk rainbow */
-    --chart-1: 180 100% 60%;
-    --chart-2: 320 100% 70%;
-    --chart-3: 90 100% 60%;
-    --chart-4: 60 100% 65%;
-    --chart-5: 270 100% 70%;
+    --chart-1: 0 0% 3.9%;
+    --chart-2: 0 0% 45.1%;
+    --chart-3: 0 0% 65%;
+    --chart-4: 0 0% 80%;
+    --chart-5: 0 0% 90%;
     
     --radius: 0.5rem;
   }
 
   .dark {
-    /* Dark mode uses the same vibrant text theme */
-    --background: 260 15% 8%;
-    --foreground: 180 85% 75%;
-    --card: 240 20% 12%;
-    --card-foreground: 320 80% 70%;
-    --popover: 245 18% 10%;
-    --popover-foreground: 90 75% 65%;
-    --primary: 180 100% 60%;
-    --primary-foreground: 260 15% 8%;
-    --secondary: 320 100% 70%;
-    --secondary-foreground: 260 15% 8%;
-    --muted: 250 15% 18%;
-    --muted-foreground: 270 60% 70%;
-    --accent: 90 100% 60%;
-    --accent-foreground: 260 15% 8%;
-    --destructive: 0 100% 65%;
-    --destructive-foreground: 60 100% 80%;
-    --border: 240 25% 25%;
-    --input: 245 20% 22%;
-    --ring: 60 100% 65%;
-    --chart-1: 180 100% 60%;
-    --chart-2: 320 100% 70%;
-    --chart-3: 90 100% 60%;
-    --chart-4: 60 100% 65%;
-    --chart-5: 270 100% 70%;
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+    
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+    
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 9%;
+    
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+    
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+    
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+    
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 0 0% 83.1%;
+    
+    --chart-1: 0 0% 98%;
+    --chart-2: 0 0% 63.9%;
+    --chart-3: 0 0% 45%;
+    --chart-4: 0 0% 25%;
+    --chart-5: 0 0% 15%;
   }
 }
 
