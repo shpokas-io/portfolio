@@ -5,7 +5,7 @@ interface SectionIndicatorProps {
 
 export default function SectionIndicator({ currentSection, totalSections }: SectionIndicatorProps) {
   return (
-    <div className="absolute bottom-6 right-8 text-sm text-gray-400 z-10">
+    <div className="absolute bottom-8 right-12 text-xl font-bold text-gray-400 z-10 tracking-wider">
       <span>
         {String(currentSection).padStart(2, '0')} / {String(totalSections).padStart(2, '0')}
       </span>

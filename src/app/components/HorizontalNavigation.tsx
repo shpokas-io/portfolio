@@ -26,7 +26,7 @@ export default function HorizontalNavigation({
   };
 
   return (
-    <div className="absolute bottom-0 left-0 right-0 h-1/4 bg-black text-white overflow-hidden flex items-center">
+    <div className="absolute bottom-0 left-0 right-0 h-[25vh] bg-black text-white overflow-hidden flex items-center">
       <div
         className="flex whitespace-nowrap transition-transform duration-500 ease-out"
         style={{ 
