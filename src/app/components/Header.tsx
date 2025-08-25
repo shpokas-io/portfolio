@@ -4,7 +4,11 @@ interface HeaderProps {
   onContactClick?: () => void;
 }
 
-export default function Header({ onMenuClick, onVersionClick, onContactClick }: HeaderProps) {
+export default function Header({
+  onMenuClick,
+  onVersionClick,
+  onContactClick,
+}: HeaderProps) {
   return (
     <header className="absolute top-0 left-0 right-0 z-50 h-28 flex items-center">
       <div className="w-full px-12">
@@ -19,7 +23,7 @@ export default function Header({ onMenuClick, onVersionClick, onContactClick }: 
             onClick={onVersionClick}
             className="text-xl font-bold text-gray-900 cursor-pointer hover:opacity-60 transition-opacity tracking-wider"
           >
-            White Version
+            Welcome
           </button>
           <button
             onClick={onContactClick}
