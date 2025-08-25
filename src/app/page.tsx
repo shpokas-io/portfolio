@@ -4,11 +4,9 @@ import Header from "./components/Header";
 import HeroSection from "./components/HeroSection";
 import ScrollIndicator from "./components/ScrollIndicator";
 import HorizontalNavigation from "./components/HorizontalNavigation";
-import SectionIndicator from "./components/SectionIndicator";
 import { useHorizontalScroll } from "./hooks/useHorizontalScroll";
 
 const SECTIONS = ["About", "Portfolio", "Experience", "Blog", "Contact"];
-const TOTAL_SECTIONS = 5;
 const LOGO_SRC = "/shpokas_logo_black.png";
 
 export default function Home() {
@@ -51,11 +49,6 @@ export default function Home() {
         scrollX={scrollX}
         currentSection={currentSection}
         onSectionClick={handleSectionClick}
-      />
-
-      <SectionIndicator
-        currentSection={currentSection}
-        totalSections={TOTAL_SECTIONS}
       />
     </div>
   );
