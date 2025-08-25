@@ -7,55 +7,55 @@ interface HorizontalNavigationProps {
 
 export default function HorizontalNavigation({
   sections,
-  scrollX,
   currentSection,
-  onSectionClick
+  onSectionClick,
 }: HorizontalNavigationProps) {
-  const SECTION_WIDTH = 600;
-  
+  const SECTION_WIDTH = 800;
+
   const getTransformX = () => {
-    if (typeof window === 'undefined') return 0;
-    
+    if (typeof window === "undefined") return 0;
+
     const viewportWidth = window.innerWidth;
-    const totalWidth = sections.length * SECTION_WIDTH;
-    const maxOffset = totalWidth - viewportWidth;
-    const scrollProgress = scrollX / 2000;
-    const offset = scrollProgress * maxOffset;
-    
-    return -offset;
+    const centerOffset = viewportWidth / 2 - SECTION_WIDTH / 2;
+    const activeIndex = currentSection - 1;
+    const targetOffset = activeIndex * SECTION_WIDTH;
+
+    return centerOffset - targetOffset;
   };
 
   return (
     <div className="absolute bottom-0 left-0 right-0 h-[25vh] bg-black text-white overflow-hidden flex items-center">
       <div
         className="flex whitespace-nowrap transition-transform duration-500 ease-out"
-        style={{ 
+        style={{
           transform: `translateX(${getTransformX()}px)`,
-          width: `${sections.length * SECTION_WIDTH}px`
         }}
       >
         {sections.map((section, index) => {
           const sectionNumber = index + 1;
           const isActive = sectionNumber === currentSection;
           const distance = Math.abs(sectionNumber - currentSection);
-          const opacity = Math.max(0.3, 1 - (distance * 0.3));
-          const scale = isActive ? 1 : Math.max(0.7, 1 - (distance * 0.1));
+          const opacity = Math.max(0.3, 1 - distance * 0.3);
+          const scale = isActive ? 1 : Math.max(0.7, 1 - distance * 0.1);
 
           return (
-            <button
+            <div
               key={index}
-              onClick={() => onSectionClick(sectionNumber)}
-              className="text-5xl md:text-7xl font-black leading-none cursor-pointer hover:text-gray-300 transition-all duration-500 select-none flex-shrink-0"
-              style={{
-                opacity,
-                transform: `scale(${scale})`,
-                color: isActive ? '#ffffff' : '#9ca3af',
-                width: `${SECTION_WIDTH}px`,
-                textAlign: 'center'
-              }}
+              className="flex-shrink-0 flex items-center justify-center"
+              style={{ width: `${SECTION_WIDTH}px` }}
             >
-              {section}
-            </button>
+              <button
+                onClick={() => onSectionClick(sectionNumber)}
+                className="text-5xl md:text-7xl font-black leading-none cursor-pointer hover:text-gray-300 transition-all duration-500 select-none"
+                style={{
+                  opacity,
+                  transform: `scale(${scale})`,
+                  color: isActive ? "#ffffff" : "#6b7280",
+                }}
+              >
+                {section}
+              </button>
+            </div>
           );
         })}
       </div>
