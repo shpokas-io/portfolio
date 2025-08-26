@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback, useRef } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
 interface UseHorizontalScrollReturn {
   scrollX: number;
@@ -10,111 +10,81 @@ interface UseHorizontalScrollReturn {
 const SECTIONS_COUNT = 5;
 const MAX_SCROLL = 2000;
 const SECTION_WIDTH = MAX_SCROLL / (SECTIONS_COUNT - 1);
+const SCROLL_THRESHOLD = 30;
+const TOUCH_THRESHOLD = 60;
+const COOLDOWN_DURATION = 500;
 
 export function useHorizontalScroll(): UseHorizontalScrollReturn {
   const [scrollX, setScrollX] = useState(0);
   const [currentSection, setCurrentSection] = useState(1);
-  const touchStartX = useRef(0);
-  const isTouching = useRef(false);
-  const isScrolling = useRef(false);
-  const lastScrollTime = useRef(0);
+  const [isThrottled, setIsThrottled] = useState(false);
+
+  const moveToSection = useCallback((newSection: number) => {
+    const clampedSection = Math.max(1, Math.min(SECTIONS_COUNT, newSection));
+    if (clampedSection === currentSection) return;
+
+    const targetScrollX = clampedSection === SECTIONS_COUNT ? MAX_SCROLL : (clampedSection - 1) * SECTION_WIDTH;
+    setScrollX(targetScrollX);
+    setCurrentSection(clampedSection);
+    
+    setIsThrottled(true);
+    setTimeout(() => setIsThrottled(false), COOLDOWN_DURATION);
+  }, [currentSection]);
 
   const handleWheel = useCallback((e: WheelEvent) => {
     e.preventDefault();
     
-    const now = Date.now();
+    if (isThrottled || Math.abs(e.deltaY) < SCROLL_THRESHOLD) return;
     
-    // If already scrolling or too soon since last scroll, ignore additional scroll events
-    if (isScrolling.current || (now - lastScrollTime.current < 600)) return;
-    
-    // Any scroll triggers section change, but only one section at a time
-    if (Math.abs(e.deltaY) > 0) {
-      // Record this scroll time and set scrolling flag
-      lastScrollTime.current = now;
-      isScrolling.current = true;
-      
-      // Determine direction - only move one section regardless of scroll strength
-      const direction = e.deltaY > 0 ? 1 : -1;
-      const newSection = Math.min(SECTIONS_COUNT, Math.max(1, currentSection + direction));
-      
-      // Only update if we're actually changing sections
-      if (newSection !== currentSection) {
-        // Calculate exact scroll position for the target section
-        const targetScrollX = newSection === SECTIONS_COUNT ? MAX_SCROLL : (newSection - 1) * SECTION_WIDTH;
-        setScrollX(targetScrollX);
-        setCurrentSection(newSection);
-      }
-      
-      // Much longer delay to prevent rapid section jumping from big scrolls
-      setTimeout(() => {
-        isScrolling.current = false;
-      }, 600); // 600ms delay to ensure only one section per scroll gesture
-    }
-  }, [currentSection]);
+    const direction = e.deltaY > 0 ? 1 : -1;
+    moveToSection(currentSection + direction);
+  }, [currentSection, isThrottled, moveToSection]);
 
-  const handleTouchStart = useCallback((e: TouchEvent) => {
-    isTouching.current = true;
-    touchStartX.current = e.touches[0].clientX;
-  }, []);
-
-  const handleTouchMove = useCallback((e: TouchEvent) => {
-    if (!isTouching.current || isScrolling.current) return;
+  const handleTouch = useCallback((e: TouchEvent) => {
+    e.preventDefault();
     
-    const touchCurrentX = e.touches[0].clientX;
-    const deltaX = Math.abs(touchStartX.current - touchCurrentX);
-    
-    // Light swipe triggers section change, but only one section at a time
-    if (deltaX > 50) {
-      // Set scrolling flag to prevent multiple section jumps during one swipe gesture
-      isScrolling.current = true;
-      
-      const direction = touchStartX.current > touchCurrentX ? 1 : -1;
-      const newSection = Math.min(SECTIONS_COUNT, Math.max(1, currentSection + direction));
-      
-      // Only update if we're actually changing sections
-      if (newSection !== currentSection) {
-        // Calculate exact scroll position for the target section
-        const targetScrollX = newSection === SECTIONS_COUNT ? MAX_SCROLL : (newSection - 1) * SECTION_WIDTH;
-        setScrollX(targetScrollX);
-        setCurrentSection(newSection);
-      }
-      
-      // Same long cooldown as desktop to ensure consistent behavior
-      setTimeout(() => {
-        isScrolling.current = false;
-      }, 600); // 600ms cooldown to ensure only one section per swipe gesture
-      
-      // End touch to prevent multiple triggers
-      isTouching.current = false;
-    }
-  }, [currentSection]);
+    if (isThrottled || e.touches.length === 0) return;
 
-  const handleTouchEnd = useCallback(() => {
-    isTouching.current = false;
-  }, []);
+    const touch = e.touches[0];
+    const startX = touch.clientX;
+
+    const handleTouchMove = (moveEvent: TouchEvent) => {
+      const currentTouch = moveEvent.touches[0];
+      if (!currentTouch) return;
+
+      const deltaX = currentTouch.clientX - startX;
+      
+      if (Math.abs(deltaX) < TOUCH_THRESHOLD) return;
+
+      const direction = deltaX > 0 ? -1 : 1;
+      moveToSection(currentSection + direction);
+      cleanup();
+    };
+
+    const cleanup = () => {
+      window.removeEventListener('touchmove', handleTouchMove);
+      window.removeEventListener('touchend', cleanup);
+    };
+
+    window.addEventListener('touchmove', handleTouchMove, { passive: false });
+    window.addEventListener('touchend', cleanup, { passive: true });
+  }, [currentSection, isThrottled, moveToSection]);
+
+  const handleSetCurrentSection = useCallback((section: number) => {
+    moveToSection(section);
+  }, [moveToSection]);
 
   const navigationProgress = (scrollX / MAX_SCROLL) * 100;
 
-  const handleSetCurrentSection = useCallback((section: number) => {
-    const targetSection = Math.min(SECTIONS_COUNT, Math.max(1, section));
-    const targetScrollX = targetSection === SECTIONS_COUNT ? MAX_SCROLL : (targetSection - 1) * SECTION_WIDTH;
-    setScrollX(targetScrollX);
-    setCurrentSection(targetSection);
-  }, []);
-
   useEffect(() => {
     window.addEventListener('wheel', handleWheel, { passive: false });
-    window.addEventListener('touchstart', handleTouchStart, { passive: true });
-    window.addEventListener('touchmove', handleTouchMove, { passive: false });
-    window.addEventListener('touchend', handleTouchEnd, { passive: true });
+    window.addEventListener('touchstart', handleTouch, { passive: false });
     
     return () => {
       window.removeEventListener('wheel', handleWheel);
-      window.removeEventListener('touchstart', handleTouchStart);
-      window.removeEventListener('touchmove', handleTouchMove);
-      window.removeEventListener('touchend', handleTouchEnd);
+      window.removeEventListener('touchstart', handleTouch);
     };
-  }, [handleWheel, handleTouchStart, handleTouchMove, handleTouchEnd]);
+  }, [handleWheel, handleTouch]);
 
   return {
     scrollX,
