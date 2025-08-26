@@ -1,6 +1,5 @@
-'use client';
+"use client";
 
-import { Progress } from "@/components/ui/progress";
 import { useState, useEffect } from "react";
 
 interface ScrollIndicatorProps {
@@ -22,10 +21,10 @@ export default function ScrollIndicator({
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 640);
     };
-    
+
     checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
   return (
@@ -48,42 +47,56 @@ export default function ScrollIndicator({
             </div>
 
             <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl font-medium text-gray-700 leading-relaxed max-w-xs sm:max-w-lg mx-auto px-2 sm:px-0">
-              Hello. I&apos;m web developer. I solve small Sass business
+              Hello. I&apos;m a web developer. I solve small Saas business
               problems with elegant design and thoughtful code.
             </p>
 
-            <div className="space-y-2 sm:space-y-3">
+            <div className="space-y-4 sm:space-y-6">
               <div className="flex items-center justify-center">
-                <div className="relative w-56 sm:w-64 md:w-72">
-                  <Progress
-                    value={navigationProgress}
-                    className="h-3 sm:h-4 bg-gray-200 [&>div]:bg-gray-900 shadow-sm"
-                  />
-
-                  {SECTION_NAMES.map((_, index) => (
-                    <div
-                      key={index}
-                      className={`absolute top-1/2 w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 rounded-full border-2 transition-all duration-300 -translate-y-1/2 shadow-sm ${
-                        index + 1 <= currentSection
-                          ? "bg-gray-900 border-gray-900 scale-110"
-                          : "bg-white border-gray-300 hover:border-gray-400"
-                      }`}
-                      style={{
-                        left: `${(index / (SECTION_NAMES.length - 1)) * 100}%`,
-                        marginLeft: isMobile ? "-5px" : "-7px",
-                      }}
-                    ></div>
-                  ))}
+                <div className="relative w-80 sm:w-96 md:w-[28rem]">
+                  {/* Custom 5-section progress bar */}
+                  <div className="flex gap-1 h-6 sm:h-8 md:h-10">
+                    {SECTION_NAMES.map((_, index) => {
+                      const isActive = index + 1 <= currentSection;
+                      const isCurrent = index + 1 === currentSection;
+                      
+                      return (
+                        <div
+                          key={index}
+                          className={`flex-1 relative transition-all duration-500 ease-out ${
+                            isActive ? 'bg-gray-900' : 'bg-gray-200'
+                          } ${
+                            isCurrent ? 'shadow-lg' : ''
+                          }`}
+                          style={{
+                            transform: isCurrent ? 'scaleY(1.1)' : 'scaleY(1)',
+                            borderRadius: '4px',
+                          }}
+                        >
+                          {/* Animated fill effect for current section */}
+                          {isCurrent && (
+                            <div
+                              className="absolute inset-0 bg-gray-800 transition-all duration-300 ease-out"
+                              style={{
+                                width: `${((navigationProgress - (index * 25)) / 25) * 100}%`,
+                                borderRadius: '4px',
+                              }}
+                            />
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
                 </div>
               </div>
 
-              <p className="text-xs sm:text-sm md:text-base font-bold text-gray-900 tracking-wider uppercase">
+              <p className="text-sm sm:text-base md:text-lg font-bold text-gray-900 tracking-wider uppercase">
                 {currentSectionName}
               </p>
             </div>
 
             <p className="text-xs font-medium text-gray-500 tracking-widest uppercase">
-              {isMobile ? 'Swipe To Explore' : 'Scroll To Discover'}
+              {isMobile ? "Swipe To Explore" : "Scroll To Discover"}
             </p>
           </div>
 
