@@ -40,25 +40,35 @@ export function useHorizontalScroll(): UseHorizontalScrollReturn {
     moveToSection(currentSection + direction);
   }, [currentSection, isThrottled, moveToSection]);
 
-  const handleTouch = useCallback((e: TouchEvent) => {
-    e.preventDefault();
-    
+  const handleTouchStart = useCallback((e: TouchEvent) => {
     if (isThrottled || e.touches.length === 0) return;
-
-    const touch = e.touches[0];
-    const startX = touch.clientX;
+    
+    const startX = e.touches[0].clientX;
+    const startY = e.touches[0].clientY;
+    let hasMoved = false;
 
     const handleTouchMove = (moveEvent: TouchEvent) => {
-      const currentTouch = moveEvent.touches[0];
-      if (!currentTouch) return;
-
-      const deltaX = currentTouch.clientX - startX;
+      if (moveEvent.touches.length === 0) return;
       
-      if (Math.abs(deltaX) < TOUCH_THRESHOLD) return;
-
-      const direction = deltaX > 0 ? -1 : 1;
-      moveToSection(currentSection + direction);
-      cleanup();
+      const currentX = moveEvent.touches[0].clientX;
+      const currentY = moveEvent.touches[0].clientY;
+      const deltaX = currentX - startX;
+      const deltaY = currentY - startY;
+      
+      // Only prevent default if this is a horizontal swipe
+      if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 10) {
+        moveEvent.preventDefault();
+      }
+      
+      if (hasMoved || Math.abs(deltaX) < TOUCH_THRESHOLD) return;
+      
+      // Ensure it's primarily a horizontal swipe
+      if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > TOUCH_THRESHOLD) {
+        hasMoved = true;
+        const direction = deltaX > 0 ? -1 : 1;
+        moveToSection(currentSection + direction);
+        cleanup();
+      }
     };
 
     const cleanup = () => {
@@ -78,13 +88,13 @@ export function useHorizontalScroll(): UseHorizontalScrollReturn {
 
   useEffect(() => {
     window.addEventListener('wheel', handleWheel, { passive: false });
-    window.addEventListener('touchstart', handleTouch, { passive: false });
+    window.addEventListener('touchstart', handleTouchStart, { passive: true });
     
     return () => {
       window.removeEventListener('wheel', handleWheel);
-      window.removeEventListener('touchstart', handleTouch);
+      window.removeEventListener('touchstart', handleTouchStart);
     };
-  }, [handleWheel, handleTouch]);
+  }, [handleWheel, handleTouchStart]);
 
   return {
     scrollX,
