@@ -1,17 +1,19 @@
-"use client"
+"use client";
 
 import { useState } from "react";
 import { Toggle } from "@/components/ui/toggle";
 
 interface HeaderProps {
   onMenuClick?: () => void;
+  onVersionClick?: () => void;
+  onContactClick?: () => void;
 }
 
 export default function Header({ onMenuClick }: HeaderProps) {
   const [language, setLanguage] = useState<"LT" | "EN">("EN");
 
   const toggleLanguage = () => {
-    setLanguage(prev => prev === "EN" ? "LT" : "EN");
+    setLanguage((prev) => (prev === "EN" ? "LT" : "EN"));
   };
 
   return (
