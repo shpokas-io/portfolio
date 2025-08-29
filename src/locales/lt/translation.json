@@ -6,7 +6,7 @@
   "hero": {
     "title": "Sveiki atvykę į mano portfelį",
     "subtitle": "Pilno ciklo kūrėjas",
-    "description": "Labas. Esu internetinių puslapių kūrėjas. Sprendžiu mažų SaaS verslo problemas su elegantiškiu dizainu ir apgalvotu kodu."
+    "description": "Padedu spręst mažų ir vidutinių įmonių problemas, kurdamas aukštos kokybės skaitmeninius sprendimus."
   },
   "navigation": {
     "home": "Pradžia",
@@ -20,11 +20,11 @@
   },
   "about": {
     "title": "Apie mane",
-    "description": "Esu aistrugas pilno ciklo kūrėjas su patirtimi šiuolaikinėse internetinėse technologijose."
+    "description": "about description text template"
   },
   "projects": {
     "title": "Mano projektai",
-    "description": "Štai keletas projektų, prie kurių dirbau"
+    "description": "Atlikti darbai ir projektai"
   },
   "contact": {
     "title": "Susisiekite su manimi",
