@@ -6,6 +6,7 @@ import HeroSection from "./components/HeroSection";
 import ScrollIndicator from "./components/ScrollIndicator";
 import HorizontalNavigation from "./components/HorizontalNavigation";
 import I18nProvider from "./components/I18nProvider";
+import FuturisticBackground from "./components/FuturisticBackground";
 import { useHorizontalScroll } from "./hooks/useHorizontalScroll";
 const LOGO_SRC = "/shpokas_logo_black.png";
 
@@ -40,6 +41,8 @@ function HomeContent() {
 
   return (
     <div className="h-screen w-screen bg-white overflow-hidden relative">
+      <FuturisticBackground />
+      
       <Header
         onMenuClick={handleMenuClick}
         onVersionClick={handleVersionClick}
