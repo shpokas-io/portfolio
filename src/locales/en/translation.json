@@ -1,0 +1,33 @@
+{
+  "header": {
+    "menu": "Menu",
+    "welcome": "Welcome"
+  },
+  "hero": {
+    "title": "Welcome to My Portfolio",
+    "subtitle": "Full Stack Developer",
+    "description": "Hello. I'm a web developer. I solve small Saas business problems with elegant design and thoughtful code."
+  },
+  "navigation": {
+    "home": "Home",
+    "about": "About",
+    "experience": "Experience",
+    "projects": "Projects",
+    "blog": "Blog",
+    "contact": "Contact",
+    "scrollToDiscover": "Scroll To Discover",
+    "swipeToExplore": "Swipe To Explore"
+  },
+  "about": {
+    "title": "About Me",
+    "description": "I am a passionate full-stack developer with experience in modern web technologies."
+  },
+  "projects": {
+    "title": "My Projects",
+    "description": "Here are some of the projects I've worked on"
+  },
+  "contact": {
+    "title": "Contact Me",
+    "description": "Let's get in touch and discuss your next project"
+  }
+}

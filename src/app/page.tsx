@@ -1,17 +1,26 @@
 "use client";
 
+import { useTranslation } from "react-i18next";
 import Header from "./components/Header";
 import HeroSection from "./components/HeroSection";
 import ScrollIndicator from "./components/ScrollIndicator";
 import HorizontalNavigation from "./components/HorizontalNavigation";
+import I18nProvider from "./components/I18nProvider";
 import { useHorizontalScroll } from "./hooks/useHorizontalScroll";
-
-const SECTIONS = ["About", "Portfolio", "Experience", "Blog", "Contact"];
 const LOGO_SRC = "/shpokas_logo_black.png";
 
-export default function Home() {
+function HomeContent() {
+  const { t } = useTranslation();
   const { scrollX, currentSection, setCurrentSection, navigationProgress } =
     useHorizontalScroll();
+
+  const sections = [
+    t("navigation.about"),
+    t("navigation.projects"),
+    t("navigation.experience"),
+    t("navigation.blog"),
+    t("navigation.contact"),
+  ];
 
   const handleMenuClick = () => {
     console.log("Menu clicked");
@@ -42,14 +51,23 @@ export default function Home() {
       <ScrollIndicator
         currentSection={currentSection}
         navigationProgress={navigationProgress}
+        sections={sections}
       />
 
       <HorizontalNavigation
-        sections={SECTIONS}
+        sections={sections}
         scrollX={scrollX}
         currentSection={currentSection}
         onSectionClick={handleSectionClick}
       />
     </div>
+  );
+}
+
+export default function Home() {
+  return (
+    <I18nProvider>
+      <HomeContent />
+    </I18nProvider>
   );
 }

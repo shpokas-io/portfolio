@@ -1,20 +1,22 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 interface ScrollIndicatorProps {
   currentSection: number;
   navigationProgress: number;
+  sections: string[];
 }
-
-const SECTION_NAMES = ["About", "Portfolio", "Experience", "Blog", "Contact"];
 
 export default function ScrollIndicator({
   currentSection,
   navigationProgress,
+  sections,
 }: ScrollIndicatorProps) {
+  const { t } = useTranslation();
   const sectionNumber = String(currentSection).padStart(2, "0");
-  const currentSectionName = SECTION_NAMES[currentSection - 1];
+  const currentSectionName = sections[currentSection - 1];
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -47,8 +49,7 @@ export default function ScrollIndicator({
             </div>
 
             <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl font-medium text-gray-700 leading-relaxed max-w-xs sm:max-w-lg mx-auto px-2 sm:px-0">
-              Hello. I&apos;m a web developer. I solve small Saas business
-              problems with elegant design and thoughtful code.
+              {t('hero.description')}
             </p>
 
             <div className="space-y-4 sm:space-y-6">
@@ -56,7 +57,7 @@ export default function ScrollIndicator({
                 <div className="relative w-80 sm:w-96 md:w-[28rem]">
                   {/* Custom 5-section progress bar */}
                   <div className="flex gap-1 h-6 sm:h-8 md:h-10">
-                    {SECTION_NAMES.map((_, index) => {
+                    {sections.map((_, index) => {
                       const isActive = index + 1 <= currentSection;
                       const isCurrent = index + 1 === currentSection;
                       
@@ -96,7 +97,7 @@ export default function ScrollIndicator({
             </div>
 
             <p className="text-xs font-medium text-gray-500 tracking-widest uppercase">
-              {isMobile ? "Swipe To Explore" : "Scroll To Discover"}
+              {isMobile ? t('navigation.swipeToExplore') : t('navigation.scrollToDiscover')}
             </p>
           </div>
 
